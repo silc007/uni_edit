@@ -3,118 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adobe Creative Cloud - Home</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr auto; /* Removed header row, adjusted grid rows */
-            min-height: 100vh;
-        }
-
-        .main-content {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto auto;
-            gap: 20px;
-        }
-
-        .apps-section {
-            background-color: white;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-            gap: 5px;
-            align-items: center;
-        }
-
-        .app-item {
-            text-align: center;
-            padding: 5px;
-        }
-
-        .app-item img {
-            max-width: 40px;
-            margin-bottom: 5px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #eee;
-            grid-column: 1 / 2;
-        }
-
-        .suggestions{
-            background-color: white;
-            padding: 10px;
-            border-radius: 8px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 5px;
-        }
-
-        .firefly{
-            background-color: white;
-            padding: 10px;
-            border-radius: 8px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 5px;
-        }
-    </style>
+    <title>Personalized Greeting</title>
 </head>
 <body>
-    <main class="main-content">
-        <section class="apps-section">
-            <h2>Your Apps</h2>
-            <div class="app-grid">
-                <div class="app-item"><img src="https://placehold.co/40x40?text=Ps" alt="Photoshop"> <p>Ps(25.12.2)</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=Ru" alt="Premiere Rush"> <p>Ru</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=A" alt="Adobe Express"> <p>A</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=St" alt="Adobe Stock"> <p>St</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=f" alt="Adobe Fonts"> <p>f</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=Ps" alt="Photoshop Web"> <p>Ps</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=A" alt="Acrobat Web"> <p>A</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=3D" alt="Substance 3D"> <p>3D</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=Ps" alt="Photoshop 24.7.5"> <p>Ps</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=LrC" alt="Lightroom Classic"> <p>LrC</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=Fi" alt="Adobe Firefly"> <p>Fi</p></div>
-                <div class="app-item"><img src="https://placehold.co/40x40?text=A" alt="Acrobat"> <p>A</p></div>
-            </div>
-        </section>
+    <h1>Hello, <span id="name">Loading...</span></h1>
+    <p>Here is your email address: <span id="email">Loading...</span></p>
 
-        <section class="suggestions">
-            <h2>Suggestions</h2>
-            <div> <p><b>St</b> Browse stock photos for your creations</p> <p>Find thousands of free stock photos applied in your projects.</p> <button>Browse Photos</button> </div>
-            <div> <p>Obtain free resources for graphic design</p> <p>Unlock the resources that you obtain in your Adobe Photoshop subscription to use in your creative work.</p><button>Browse Resources</button> </div>
-            <div> <p>Create, modify, and share pdf's</p> <p>Display and modify documents, use electronic signatures, collaborate on revisions, and more.</p> <button>Open</button> </div>
-            <div> <p>Create graphics and exceptional illustrations</p> <p>Design with professional processes, fine-tune designs, lines, and typography, and import and edit files.</p><button>Install</button> </div>
-            <div> <p>Manage Comments</p> <p>Keep track of professional comments.</p> </div>
-        </section>
+    <script>
+        // Fetching data from the AEM GraphQL endpoint
+        fetch('https://odin.adobe.com/content/dam/sandbox/hero-of-the-day/ronsain.cfm.gql.json')
+            .then(response => response.json())
+            .then(data => {
+                // Accessing the user's name and email from the returned data
+                const userName = data.data.heroOfTheDayByPath.item._path.split('/').pop(); // Assuming the name is part of the path, e.g., "ronsain"
+                const userEmail = data.data.heroOfTheDayByPath.item.userEmail || "No email provided"; // Email is null in your case
 
-        <section class="firefly">
-            <h2>Discover new ways to create with Adobe Firefly</h2>
-            <div> <img src="https://placehold.co/150x100" alt="Video Generation"> <p>Generate a video (Beta)</p> <button>Open</button></div>
-            <div> <img src="httpshttps://placehold.co/150x100" alt="Text to Image"> <p>Text to Image</p> <button>Open</button></div>
-            <div> <img src="https://placehold.co/150x100" alt="Scene to Image"> <p>Scene to Image (Beta)</p> <button>Open</button></div>
-            <div> <img src="https://placehold.co/150x100" alt="Translate Audio"> <p>Translate Audio and Video</p> <button>Open</button></div>
-            <div> <img src="https://placehold.co/150x100" alt="Generative Fill"> <p>Generative Fill</p> <button>Open</button></div>
-            <div> <img src="https://placehold.co/150x100" alt="Developments"> <p>Developments</p> <button>Open</button></div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Adobe Systems Incorporated</p>
-    </footer>
+                // Update the HTML with the data
+                document.getElementById("name").textContent = userName;
+                document.getElementById("email").textContent = userEmail;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Fallback in case of error
+                document.getElementById("name").textContent = "Error loading name";
+                document.getElementById("email").textContent = "Error loading email";
+            });
+    </script>
 </body>
 </html>
